@@ -2,6 +2,9 @@
 This script will update any MQ2 installation or make a new clean install.
 ## How to
 - Download the latest PowerShell file under [Releases](https://github.com/Zoh63392187/MQ2-Updater/releases/)
+
+![image](Assets/howto5.png)
+
 - Place the downloaded file at the root of your MQ2
 
 ![image](Assets/howto1.png)
@@ -21,3 +24,5 @@ The script will now download the source code
 Once completed it should look like this:
 
 ![image](Assets/howto4.png)
+
+Launch MQ2 and have fun- Game on!
