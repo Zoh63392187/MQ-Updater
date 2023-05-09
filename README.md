@@ -26,3 +26,11 @@ Once completed it should look like this:
 ![image](Assets/howto4.png)
 
 Launch MQ2 and have fun- Game on!
+
+## Everquest patchday and notes
+
+Next time EverQuest patches and the MQ2 is outdated just run the script again and enjoy.
+If MQ2 is not updated for the current version of EverQuest just wait another hour and try again
+
+Please note that for the script to update your MQ2 installation the MQ2 Devs must have made a new release.
+[Offcial MQ2 release](https://github.com/macroquest/macroquest/releases/) - All credit to the MQ2 devs and the hard work they do!
