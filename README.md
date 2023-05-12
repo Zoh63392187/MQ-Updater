@@ -1,5 +1,5 @@
 # MQ2-Updater
-This script will update any current MQ2 installation (Even RedGuides and work with class plugins) or make a new clean install.
+This script will update any current MQ2 installation (Even RedGuides and works with class plugins) or make a new clean install.
 Make sure that MQ2 is NOT running before you run this updater script.
 ## How to
 - Download the latest PowerShell file under [Releases](https://github.com/Zoh63392187/MQ2-Updater/releases/)
