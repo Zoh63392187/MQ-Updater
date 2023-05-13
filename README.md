@@ -16,7 +16,7 @@ The window should look like below
 
 ![image](Assets/howto2.png)
 
-- Press "U" end hit enter
+- Press "Update MQ2"
 
 The script will now download the source code
 
