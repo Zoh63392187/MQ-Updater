@@ -20,12 +20,12 @@ Add-Type -AssemblyName System.Drawing
 
 $LocalUpdateForm                 = New-Object system.Windows.Forms.Form
 $LocalUpdateForm.ClientSize      = '480,200'
-$LocalUpdateForm.text            = "MQ2-Updater"
+$LocalUpdateForm.text            = "MQ-Updater"
 $LocalUpdateForm.BackColor       = "#ffffff"
 $LocalUpdateForm.TopMost         = $false
 
 $Titel                           = New-Object system.Windows.Forms.Label
-$Titel.text                      = "MQ2-Updater by Blasty v1.1"
+$Titel.text                      = "MQ-Updater by Blasty v1.1"
 $Titel.AutoSize                  = $true
 $Titel.width                     = 25
 $Titel.height                    = 10
@@ -51,18 +51,18 @@ $AddUpdateBtn.Visible           = $true
 if (Test-Path "MacroQuest.exe"){ 
     try { 
         [IO.File]::OpenWrite("crashpad_handler.exe").close()
-        $AddUpdateBtn.text = "Update MQ2"
-        $Description.text = "This script will update any current MQ2 installation or make a new install.`n(Even MQ2 from RedGuides and also works with all class plugins)`n`nMake sure that MQ2 is NOT running."
+        $AddUpdateBtn.text = "Update MQ"
+        $Description.text = "This script will update any current MQ installation or make a new install.`n(Even MQ from RedGuides and also works with all class plugins)`n`nMake sure that MQ is NOT running."
     }
     catch {
         $AddUpdateBtn.Visible = $false
         $Description.ForeColor = "#FF0000"
-        $Description.text = "MQ2 is running - aborting!"
+        $Description.text = "MQ is running - aborting!"
     }
     
 } else { 
     $AddUpdateBtn.text = "New Install" 
-    $Description.text = "This script will update any current MQ2 installation or make a new install.`n(Even MQ2 from RedGuides and also works with all class plugins)`n`nMQ2 NOT detected!"
+    $Description.text = "This script will update any current MQ installation or make a new install.`n(Even MQ from RedGuides and also works with all class plugins)`n`nMQ NOT detected!"
 }
 
 $LocalUpdateForm.controls.AddRange(@($Titel,$Description,$AddUpdateBtn))
