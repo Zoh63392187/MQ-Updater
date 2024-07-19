@@ -1,4 +1,4 @@
-# MQ-Updater
+# MQ-Update
 This script will update any current MQ installation (Even RedGuides and works with class plugins) or make a new clean install.
 Make sure that MQ is NOT running before you run this updater script.
 ## How to
@@ -10,7 +10,7 @@ Make sure that MQ is NOT running before you run this updater script.
 
 ![image](Assets/howto1.png)
 
-- Run the MQUpdate.ps1 (Right click the file and select: Run with PowerShell)
+- Run the MQ-Update.ps1 (Right click the file and select: Run with PowerShell)
 
 The window should look like below
 
