@@ -13,7 +13,6 @@ $consolePtr = [Console.Window]::GetConsoleWindow()
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-
 #---------------------------------------------------------[Form]--------------------------------------------------------
 
 [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -23,6 +22,7 @@ $LocalUpdateForm.ClientSize      = '480,200'
 $LocalUpdateForm.text            = "MQ-Updater"
 $LocalUpdateForm.BackColor       = "#ffffff"
 $LocalUpdateForm.TopMost         = $false
+$LocalUpdateForm.StartPosition = "CenterScreen"
 
 $Titel                           = New-Object system.Windows.Forms.Label
 $Titel.text                      = "MQ-Updater by Blasty v1.1"
@@ -35,7 +35,7 @@ $Titel.Font                      = 'Microsoft Sans Serif,13'
 $Description                     = New-Object system.Windows.Forms.Label
 $Description.AutoSize            = $false
 $Description.width               = 450
-$Description.height              = 60
+$Description.height              = 90
 $Description.location            = New-Object System.Drawing.Point(20,50)
 $Description.Font                = 'Microsoft Sans Serif,10'
 
@@ -52,17 +52,16 @@ if (Test-Path "MacroQuest.exe"){
     try { 
         [IO.File]::OpenWrite("crashpad_handler.exe").close()
         $AddUpdateBtn.text = "Update MQ"
-        $Description.text = "This script will update any current MQ installation or make a new install.`n(Even MQ from RedGuides and also works with all class plugins)`n`nMake sure that MQ is NOT running."
+        $Description.text = "This will update any current MQ installation or make a new install.`n(Even MQ from RedGuides and also works with all class plugins)`n`nMake sure that MQ is NOT running.`n`nAll credits to the MQ devs!"
     }
     catch {
         $AddUpdateBtn.Visible = $false
         $Description.ForeColor = "#FF0000"
         $Description.text = "MQ is running - aborting!"
     }
-    
 } else { 
     $AddUpdateBtn.text = "New Install" 
-    $Description.text = "This script will update any current MQ installation or make a new install.`n(Even MQ from RedGuides and also works with all class plugins)`n`nMQ NOT detected!"
+    $Description.text = "This will make a new install as MQ is NOT detected!`nIf you do have MQ installed make sure to put this script in the root of your MQ folder."
 }
 
 $LocalUpdateForm.controls.AddRange(@($Titel,$Description,$AddUpdateBtn))
@@ -75,15 +74,13 @@ function UnzipIT{
 function AddUpdate {
     $AddUpdateBtn.Visible = $false
 	try {                                      
-        # declaring color
-        $Description.ForeColor         = "#007500"
         # Cleanup
         if (Test-Path "MacroQuest.zip") {
             del MacroQuest.zip
         }
-        $Description.text = "Downloading... Please be patient"
-        # Generating target url for update zip file with latest avv signature
-        wget https://github.com/macroquest/macroquest/releases/download/rel-live/MacroQuest.zip -OutFile MacroQuest.zip
+        $Description.text = "Downloading... Please be patient"        
+        Import-Module BitsTransfer
+        Start-BitsTransfer https://github.com/macroquest/macroquest/releases/download/rel-live/MacroQuest.zip MacroQuest.zip
         # Unpack zipfile to target destanation
         try {
             Expand-Archive MacroQuest.zip -DestinationPath .\  -Force
@@ -91,17 +88,32 @@ function AddUpdate {
         catch {
             unzipIT MacroQuest.zip .\
         }
-        $tid = Get-Date -format "yyyy.MM.dd HH:mm:ss"
-        $Description.text = "Update complete at " + $tid
+        # declaring color
+		$Description.ForeColor         = "#007500"
+		$tid = Get-Date -format "yyyy.MM.dd HH:mm:ss"
+        $Description.text = "Complete at " + $tid
         #Another cleanup
         if (Test-Path "MacroQuest.zip") {
             del MacroQuest.zip
         }
-        
     }
     catch {
         $Description.ForeColor = "#f00000"
-        $Description.text = "Update failed!"
+        $Description.text = "MQ update Failed!"
+    }
+	try {
+		Start-BitsTransfer http://77.66.65.240/ZoneConnections.yaml resources/EasyFind/ZoneConnections.yaml
+	}
+	catch {
+        $Description.ForeColor = "#f00000"
+        $Description.text = "EasyFind Failed!"
+    }
+	try {
+		Start-BitsTransfer http://77.66.65.240/guildhalllrg.navmesh resources/MQ2Nav/guildhalllrg.navmesh
+	}
+	catch {
+        $Description.ForeColor = "#f00000"
+        $Description.text = "Guildhall mesh failed Failed!"
     }
 }
 
